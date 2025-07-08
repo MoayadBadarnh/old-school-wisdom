@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>المدرسة القديمة - الحِكم</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow-x: hidden;
+      background-color: #f1e4d1;
+      z-index: 0;
+    }
+
+    /* خلفية متحركة باستخدام عنصر قبل body */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('mm.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      filter: brightness(0.75);
+      opacity: 0.85;
+      z-index: -1;
+
+      animation: bgMove 60s linear infinite;
+      transform-origin: center center;
+    }
+
+    @keyframes bgMove {
+      0% {
+        background-position: center center;
+        transform: scale(1) rotate(0deg);
+      }
+      50% {
+        background-position: 10% 60%;
+        transform: scale(1.1) rotate(1.5deg);
+      }
+      100% {
+        background-position: center center;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    header {
+      background-color: #8A3B12;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      width: 100%;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px 20px;
+      background-color: #fff3e0;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 90%;
+      margin: 20px auto 10px;
+      border-radius: 12px;
+    }
+
+    .profile img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #8A3B12;
+    }
+
+    .post-area {
+      padding: 15px 20px;
+      background-color: #fff8ef;
+      border-top: 2px solid #e5c4aa;
+      max-width: 600px;
+      width: 90%;
+      margin: 0 auto 30px;
+      border-radius: 12px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 12px 15px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      resize: none;
+      outline: none;
+      background-color: #fffaf7;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 25px;
+      background-color: #8A3B12;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #6a2d0d;
+    }
+
+    .posts {
+      padding: 0 20px 30px;
+      max-width: 600px;
+      width: 90%;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    .post {
+      background-color: #fff;
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      word-wrap: break-word;
+    }
+
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .post-header img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid #8A3B12;
+    }
+
+    .post-header .info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .post-header .info span.name {
+      font-weight: bold;
+      color: #8A3B12;
+    }
+
+    .post-header .info span.time {
+      font-size: 12px;
+      color: #777;
+    }
+
+    .post p {
+      font-size: 17px;
+      color: #333;
+      margin: 0;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 20px;
+        padding: 15px;
+      }
+
+      .profile {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 15px;
+        width: 95%;
+      }
+
+      .profile img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .post-area {
+        padding: 10px 15px;
+        width: 95%;
+      }
+
+      textarea {
+        height: 80px;
+        font-size: 14px;
+      }
+
+      button {
+        font-size: 14px;
+        padding: 12px;
+      }
+
+      .posts {
+        width: 95%;
+        padding: 0 15px 20px;
+      }
+
+      .post-header img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .post p {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>المدرسة القديمة - بصق الحِكم</header>
+
+  <div class="profile">
+    <img id="userPic" src="dd.jpeg" alt="صورة المستخدم">
+    <div>
+      <h3 id="userName">...</h3>
+      <p>أهلاً بك! انشر حكمتك هنا</p>
+    </div>
+  </div>
+
+  <div class="post-area">
+    <textarea id="wisdomInput" placeholder="اكتب حكمتك هنا..."></textarea>
+    <button onclick="publishWisdom()">نشر</button>
+  </div>
+
+  <div class="posts" id="postsContainer"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <script>
+    // تحقق إذا المستخدم مسجل الدخول
+    const username = localStorage.getItem('username');
+    const userImage = localStorage.getItem('userImage') || 'dd.jpeg';
+
+    if (!username) {
+      // إذا لم يكن هناك اسم مستخدم، ارجع لصفحة تسجيل الدخول
+      window.location.href = 'login.html';
+    } else {
+      document.getElementById('userName').textContent = username;
+      document.getElementById('userPic').src = userImage;
+    }
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD39q_3yX7oCOtj_BlPjs74M3ZxXneknuI",
+      authDomain: "oldschoolwisdom-19809.firebaseapp.com",
+      databaseURL: "https://oldschoolwisdom-19809-default-rtdb.firebaseio.com",
+      projectId: "oldschoolwisdom-19809",
+      storageBucket: "oldschoolwisdom-19809.firebasestorage.app",
+      messagingSenderId: "1018329271807",
+      appId: "1:1018329271807:web:727f766d07caaed314abca",
+      measurementId: "G-4HFHX1FBNL"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    function publishWisdom() {
+      const input = document.getElementById('wisdomInput');
+      const text = input.value.trim();
+      if (text === '') return;
+
+      const post = {
+        name: username,
+        image: userImage,
+        content: text,
+        time: new Date().toLocaleString('ar-EG')
+      };
+
+      database.ref('posts').push(post)
+        .then(() => {
+          input.value = '';
+        })
+        .catch(error => {
+          alert('خطأ في النشر: ' + error.message);
+        });
+    }
+
+    function displayPosts() {
+      const postsContainer = document.getElementById('postsContainer');
+      database.ref('posts').orderByKey().limitToLast(100).on('value', snapshot => {
+        postsContainer.innerHTML = '';
+        const posts = [];
+        snapshot.forEach(childSnapshot => {
+          posts.push(childSnapshot.val());
+        });
+        posts.reverse().forEach(post => {
+          const div = document.createElement('div');
+          div.className = 'post';
+          div.innerHTML = `
+            <div class="post-header">
+              <img src="${post.image}" alt="User">
+              <div class="info">
+                <span class="name">${post.name}</span>
+                <span class="time">${post.time}</span>
+              </div>
+            </div>
+            <p>${post.content}</p>
+          `;
+          postsContainer.appendChild(div);
+        });
+      });
+    }
+
+    displayPosts();
+  </script>
+
+</body>
+</html>

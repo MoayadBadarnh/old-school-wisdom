@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>المدرسة القديمة - تسجيل الدخول</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      direction: rtl;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                  url('dd.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: bgZoom 30s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgZoom {
+      0% { background-size: 110%; }
+      100% { background-size: 130%; }
+    }
+
+    .login-container {
+      background: rgba(138, 59, 18, 0.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 35px 30px;
+      border-radius: 15px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      color: #f5e6d3;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    h2 {
+      color: #f5e6d3;
+      font-weight: bold;
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    p.tagline {
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="file"] {
+      width: 100%;
+      padding: 12px 16px;
+      margin: 10px 0 20px;
+      border: 1.8px solid #5c2608;
+      border-radius: 10px;
+      font-size: 16px;
+      background-color: #f5e6d3;
+      color: #5c2608;
+    }
+
+    input:focus {
+      border-color: #3d1a05;
+      background-color: #fff;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #000000;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.6);
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #333;
+      animation: glow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.3); }
+      100% { box-shadow: 0 0 20px 6px rgba(255, 255, 255, 0.6); }
+    }
+
+    .footer-text {
+      margin-top: 25px;
+      font-size: 16px;
+      color: #fbe8d1;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .login-container {
+        padding: 20px 15px;
+        max-width: 90%;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      input[type="text"],
+      input[type="password"],
+      input[type="file"] {
+        font-size: 15px;
+        padding: 10px;
+      }
+
+      button {
+        font-size: 16px;
+        padding: 10px;
+      }
+
+      .footer-text {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>أهلاً بك في المدرسة القديمة</h2>
+    <p class="tagline">منصة الحكم والأقوال الخالدة</p>
+    <form id="loginForm">
+      <input type="text" id="username" name="username" placeholder="ادخل اسمك" required />
+      <input type="password" id="password" name="password" placeholder="كلمة المرور" required />
+      <input type="file" id="userImage" name="userImage" accept="image/*" />
+      <button type="submit">دخول</button>
+    </form>
+    <div class="footer-text">هل مستعد لبصق الحكم؟</div>
+  </div>
+
+  <audio id="moanSound" src="https://actions.google.com/sounds/v1/human/soft_pain.ogg" preload="auto"></audio>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const moanSound = document.getElementById('moanSound');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const image = document.getElementById('userImage').files[0];
+
+      if (username !== '' && password !== '') {
+        moanSound.currentTime = 0;
+        moanSound.volume = 0.15;
+        moanSound.play();
+
+        localStorage.setItem('username', username);
+        localStorage.setItem('password', password);
+
+        if (image) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            localStorage.setItem('userImage', e.target.result);
+            window.location.href = 'index.html';
+          };
+          reader.readAsDataURL(image);
+        } else {
+          window.location.href = 'index.html';
+        }
+
+      } else {
+        alert('يرجى تعبئة الاسم وكلمة المرور.');
+      }
+    });
+  </script>
+</body>
+</html>
