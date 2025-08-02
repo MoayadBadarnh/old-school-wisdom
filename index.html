@@ -7,141 +7,180 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
 
-    html, body {
-      height: 100%;
-      margin: 0;
+    body {
       font-family: 'Cairo', sans-serif;
       direction: rtl;
-      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                  url('dd.jpeg') no-repeat center center fixed;
-      background-size: cover;
-      animation: wave 25s infinite alternate ease-in-out;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+      margin: 0;
+      padding: 0;
+      background: url('add.jpeg') no-repeat center center fixed;
+      background-size: 115%;
+      animation: bgMove 30s infinite alternate ease-in-out;
     }
 
-    @keyframes wave {
-      0% { background-position: center top; background-size: 110%; }
-      100% { background-position: center bottom; background-size: 125%; }
+    @keyframes bgMove {
+      0% { background-size: 110%; }
+      100% { background-size: 120%; }
     }
 
     .container {
-      background: rgba(138, 59, 18, 0.35);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      padding: 30px 25px;
+      max-width: 700px;
+      margin: 50px auto;
+      background: rgba(255,255,255,0.85);
       border-radius: 15px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-      max-width: 600px;
-      width: 90%;
-      text-align: center;
-      color: #f5e6d3;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      position: relative;
     }
 
-    h1 {
-      color: #f5e6d3;
-      font-size: 28px;
+    .logout-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background-color: crimson;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
       margin-bottom: 20px;
+    }
+
+    .user-info img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-left: 15px;
+      border: 2px solid #5c2608;
+    }
+
+    .user-info span {
+      font-size: 20px;
+      font-weight: bold;
+      color: #3d1a05;
     }
 
     textarea {
       width: 100%;
-      padding: 14px;
-      border: 2px solid #5c2608;
+      height: 100px;
+      font-size: 16px;
+      padding: 12px;
       border-radius: 10px;
-      font-size: 17px;
+      border: 1.5px solid #888;
       resize: none;
-      background-color: #f5e6d3;
-      color: #5c2608;
       margin-bottom: 15px;
     }
 
-    button {
-      width: 100%;
-      padding: 14px;
-      background-color: #000000;
-      border: none;
-      border-radius: 12px;
+    button.publish {
+      background-color: #000;
       color: white;
-      font-size: 18px;
-      font-weight: bold;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
       cursor: pointer;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.6);
+      font-weight: bold;
       transition: background-color 0.3s ease;
     }
 
-    button:hover {
+    button.publish:hover {
       background-color: #333;
-      animation: glow 1.5s ease-in-out infinite alternate;
     }
 
-    @keyframes glow {
-      0% { box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.3); }
-      100% { box-shadow: 0 0 20px 6px rgba(255, 255, 255, 0.6); }
+    .posts {
+      margin-top: 30px;
     }
 
-    .wisdom-list {
-      margin-top: 25px;
-      text-align: right;
-      color: #fff8f1;
-      max-height: 300px;
-      overflow-y: auto;
+    .post {
+      background: #fbe8d1;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    .wisdom-item {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 12px 16px;
+    .post-header {
+      display: flex;
+      align-items: center;
       margin-bottom: 10px;
-      border-radius: 10px;
-      font-size: 16px;
-      border: 1px solid rgba(255,255,255,0.2);
     }
 
-    @media (max-width: 600px) {
-      .container {
-        padding: 20px 15px;
-      }
+    .post-header img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      margin-left: 10px;
+      border: 2px solid #5c2608;
+    }
 
-      h1 {
-        font-size: 22px;
-      }
+    .post-header span {
+      font-weight: bold;
+      color: #5c2608;
+    }
 
-      textarea {
-        font-size: 15px;
-      }
-
-      button {
-        font-size: 16px;
-      }
+    .post-content {
+      font-size: 16px;
+      color: #3d1a05;
+      margin-top: 5px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>بصق الحكم</h1>
-    <textarea id="wisdomInput" rows="4" placeholder="أبصق حكمتك هنا..."></textarea>
-    <button onclick="publishWisdom()">نشر</button>
+    <button class="logout-btn" onclick="logout()">⎋</button>
 
-    <div class="wisdom-list" id="wisdomList"></div>
+    <div class="user-info">
+      <img id="userPic" src="" alt="صورة المستخدم">
+      <span id="userName">المستخدم</span>
+    </div>
+
+    <textarea id="wisdomInput" placeholder="أبصق حكمتك..."></textarea>
+    <button class="publish" onclick="postWisdom()">نشر</button>
+
+    <div class="posts" id="postsContainer"></div>
   </div>
 
   <script>
-    function publishWisdom() {
-      const input = document.getElementById("wisdomInput");
-      const text = input.value.trim();
-      if (text !== "") {
-        const list = document.getElementById("wisdomList");
-        const item = document.createElement("div");
-        item.className = "wisdom-item";
-        item.textContent = text;
-        list.prepend(item); // يظهر في الأعلى
-        input.value = "";
-      } else {
-        alert("يرجى كتابة حكمة قبل النشر.");
-      }
+    // جلب البيانات من localStorage
+    const userName = localStorage.getItem('username');
+    const userImage = localStorage.getItem('userImage');
+
+    // عرضها في الصفحة
+    document.getElementById('userName').textContent = userName || 'مستخدم مجهول';
+    document.getElementById('userPic').src = userImage || 'dd.jpeg';
+
+    // دالة النشر
+    function postWisdom() {
+      const text = document.getElementById('wisdomInput').value.trim();
+      if (text === '') return;
+
+      const postContainer = document.createElement('div');
+      postContainer.className = 'post';
+
+      postContainer.innerHTML = `
+        <div class="post-header">
+          <img src="${userImage || 'dd.jpeg'}" alt="User">
+          <span>${userName || 'مستخدم'}</span>
+        </div>
+        <div class="post-content">${text}</div>
+      `;
+
+      document.getElementById('postsContainer').prepend(postContainer);
+      document.getElementById('wisdomInput').value = '';
+    }
+
+    // دالة تسجيل الخروج
+    function logout() {
+      localStorage.removeItem('username');
+      localStorage.removeItem('userImage');
+      window.location.href = 'login.html';
     }
   </script>
 </body>
