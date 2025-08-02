@@ -102,6 +102,27 @@
       font-weight: bold;
     }
 
+    .avatar-tip {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px dashed #f5e6d3;
+      color: #f5e6d3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 15px;
+      padding: 15px;
+      margin: 0 auto 20px;
+      transition: background 0.3s;
+    }
+
+    .avatar-tip:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
     @media (max-width: 600px) {
       .login-container {
         padding: 20px 15px;
@@ -127,6 +148,13 @@
       .footer-text {
         font-size: 14px;
       }
+
+      .avatar-tip {
+        width: 120px;
+        height: 120px;
+        font-size: 13px;
+        padding: 10px;
+      }
     }
   </style>
 </head>
@@ -137,7 +165,11 @@
     <form id="loginForm">
       <input type="text" id="username" name="username" placeholder="ادخل اسمك" required />
       <input type="password" id="password" name="password" placeholder="كلمة المرور" required />
+
+      <!-- دائرة النص -->
+      <div class="avatar-tip">اختر صورة شخصية لك حتى يكون العرض متناسقًا</div>
       <input type="file" id="userImage" name="userImage" accept="image/*" />
+
       <button type="submit">دخول</button>
     </form>
     <div class="footer-text">هل مستعد لبصق الحكم؟</div>
