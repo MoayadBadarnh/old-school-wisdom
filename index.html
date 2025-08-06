@@ -10,10 +10,7 @@
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
-html, body {
-  height: 100%;
-  overflow: auto;
-}
+
 
     body {
       font-family: 'Cairo', sans-serif;
@@ -127,8 +124,9 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden;
+  overflow-y: auto; /* اسمح بالتمرير العمودي */
 }
+
 
 body {
   background: url('mm.jpeg') no-repeat center center fixed;
@@ -154,10 +152,7 @@ body {
   </style>
 
   <script>
-    html, body {
-  height: 100%;
-  overflow: auto;
-}
+
     // بيانات Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyAPcqfWJ_CRf_0OO37vo0qy6Kg2e_g0vBM",
@@ -256,5 +251,6 @@ body {
   </div>
 </body>
 </html>
+
 
 
