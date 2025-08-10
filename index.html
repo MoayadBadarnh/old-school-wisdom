@@ -252,8 +252,32 @@ body {
     <button class="publish" onclick="postWisdom()">نشر</button>
     <div class="posts" id="postsContainer"></div>
   </div>
+  <!-- زر توليد الشعر -->
+<button id="generateBtn">توليد بيت شعر</button>
+
+<!-- مكان عرض النتيجة -->
+<div id="poemResult" style="margin-top: 10px; font-weight: bold;"></div>
+<script>
+document.getElementById('generateBtn').addEventListener('click', function() {
+    fetch('http://127.0.0.1:5000/generate', { // رابط API المحلي
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            bahar: 'الطويل', // البحر المطلوب
+            qafiya: 'م'      // القافية المطلوبة
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('poemResult').innerText = data.poem;
+    })
+    .catch(error => console.error(error));
+});
+</script>
+
 </body>
 </html>
+
 
 
 
